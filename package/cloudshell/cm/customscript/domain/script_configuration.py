@@ -75,6 +75,16 @@ class ScriptConfigurationParser(object):
         if host.get('parameters'):
             script_conf.host_conf.parameters = dict((i['name'], i['value']) for i in host['parameters'])
 
+            params = script_conf.host_conf.parameters
+            for param in params:
+                if param.lower() == "branch":
+                    if params[param]:
+                        url_list = script_conf.script_repo.url.split("/")
+                        list_len = len(url_list)
+                        url_list[list_len - 2] = params[param]
+                        new_url = "/".join(url_list)
+                        script_conf.script_repo.url = new_url
+
         return script_conf
 
     def _get_password(self, json_host):
