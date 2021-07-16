@@ -39,7 +39,7 @@ class CustomScriptShell(object):
                     script_conf = ScriptConfigurationParser(api).json_to_object(script_conf_json)
 
                     output_writer = ReservationOutputWriter(api, command_context)
-
+                    logger.info("New version")
                     logger.info('Downloading file from \'%s\' ...' % script_conf.script_repo.url)
                     script_file = self._download_script(script_conf.script_repo, logger, cancel_sampler, script_conf.verify_certificate)
                     logger.info('Done (%s, %s chars).' % (script_file.name, len(script_file.text)))
